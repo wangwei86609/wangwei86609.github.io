@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          正则表达式 - Stargate
+          编译器设计-概述 - Stargate
         
     </title>
 
-    <link rel="canonical" href="https://stargate.org/2024/03/31/正则表达式/">
+    <link rel="canonical" href="https://stargate.org/2024/04/13/cd-overview/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -109,18 +109,18 @@
                         <div class="tags">
                             
                         </div>
-                        <h1>正则表达式</h1>
+                        <h1>编译器设计-概述</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Reed on
-                            2024-03-31
+                            2024-04-13
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">491</span> and
-                                Reading Time <span class="post-count">3</span> Minutes
+                                Words <span class="post-count">651</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -257,48 +257,33 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="Compiler-Design-Regular-Expressions"><a href="#Compiler-Design-Regular-Expressions" class="headerlink" title="Compiler Design - Regular Expressions"></a>Compiler Design - Regular Expressions</h1><p>The lexical analyzer needs to scan and identify only a finite set of valid string/token/lexeme that belong to the language in hand. It searches for the pattern defined by the language rules.<br>Regular expressions have the capability to express finite languages by defining a pattern for finite strings of symbols. The grammar defined by regular expressions is known as regular grammar. The language defined by regular grammar is known as regular language.<br>Regular expression is an important notation for specifying patterns. Each pattern matches a set of strings, so regular expressions serve as names for a set of strings. Programming language tokens can be described by regular languages. The specification of regular expressions is an example of a recursive definition. Regular languages are easy to understand and have efficient implementation.<br>There are a number of algebraic laws that are obeyed by regular expressions, which can be used to manipulate regular expressions into equivalent forms.</p>
-<h2 id="Operations"><a href="#Operations" class="headerlink" title="Operations"></a>Operations</h2><p>The various operations on languages are:</p>
+                <h1 id="Compiler-Design-Overview"><a href="#Compiler-Design-Overview" class="headerlink" title="Compiler Design - Overview"></a>Compiler Design - Overview</h1><p>Computers are a balanced mix of software and hardware. Hardware is just a piece of mechanical device and its functions are being controlled by a compatible software. Hardware understands instructions in the form of electronic charge, which is the counterpart of binary language in software programming. Binary language has only two alphabets, 0 and 1. To instruct, the hardware codes must be written in binary format, which is simply a series of 1s and 0s. It would be a difficult and cumbersome task for computer programmers to write such codes, which is why we have compilers to write such codes.</p>
+<h2 id="Language-Processing-System"><a href="#Language-Processing-System" class="headerlink" title="Language Processing System"></a>Language Processing System</h2><p>We have learnt that any computer system is made of hardware and software.<br>The hardware understands a language, which humans cannot understand.<br>So we write programs in high-level language, which is easier for us to understand and remember.<br>These programs are then fed into a series of tools and OS components to get the desired code that can be used by the machine. This is known as Language Processing System.<br><img src="/img/language_processing_system.jpg" alt="LPS"></p>
+<p>The high-level language is converted into binary language in various phases. A compiler is a program that converts high-level language to assembly language. Similarly, an assembler is a program that converts the assembly language to machine-level language.<br>Let us first understand how a program, using C compiler, is executed on a host machine.</p>
 <ul>
-<li>Union of two languages L and M is written as L U M = {s | s is in L or s is in M}</li>
-<li>Concatenation of two languages L and M is written as LM = {st | s is in L and t is in M}</li>
-<li>The Kleene Closure of a language L is written as L* = Zero or more occurrence of language L.</li>
+<li>User writes a program in C language (high-level language).</li>
+<li>The C compiler, compiles the program and translates it to assembly program (low-level language).</li>
+<li>An assembler then translates the assembly program into machine code (object).</li>
+<li>A linker tool is used to link all the parts of the program together for execution (executable machine code).</li>
+<li>A loader loads all of them into memory and then the program is executed.<br>Before diving straight into the concepts of compilers, we should understand a few other tools that work closely with compilers.</li>
 </ul>
-<h2 id="Notations"><a href="#Notations" class="headerlink" title="Notations"></a>Notations</h2><p>If r and s are regular expressions denoting the languages L(r) and L(s), then</p>
-<ul>
-<li>Union : (r)|(s) is a regular expression denoting L(r) U L(s)</li>
-<li>Concatenation : (r)(s) is a regular expression denoting L(r)L(s)</li>
-<li>Kleene closure : (r)<em> is a regular expression denoting (L(r))</em></li>
-<li>(r) is a regular expression denoting L(r)<h2 id="Precedence-and-Associativity"><a href="#Precedence-and-Associativity" class="headerlink" title="Precedence and Associativity"></a>Precedence and Associativity</h2></li>
-<li>*, concatenation (.), and | (pipe sign) are left associative</li>
-<li><ul>
-<li>has the highest precedence</li>
-</ul>
-</li>
-<li>Concatenation (.) has the second highest precedence.</li>
-<li>|(pipe sign) has the lowest precedence of all.</li>
-</ul>
-<h2 id="Representing-valid-tokens-of-a-language-in-regular-expression"><a href="#Representing-valid-tokens-of-a-language-in-regular-expression" class="headerlink" title="Representing valid tokens of a language in regular expression"></a>Representing valid tokens of a language in regular expression</h2><p>If x is a regular expression, then:</p>
-<ul>
-<li>x* means zero or more occurrence of x. i.e., it can generate { e, x, xx, xxx, xxxx, … }</li>
-<li>x+ means one or more occurrence of x. i.e., it can generate { x, xx, xxx, xxxx … } or x.x*</li>
-<li>x? means at most one occurrence of x i.e., it can generate either {x} or {e}.</li>
-<li>[a-z] is all lower-case alphabets of English language.</li>
-<li>[A-Z] is all upper-case alphabets of English language.</li>
-<li>[0-9] is all natural digits used in mathematics.</li>
-</ul>
-<h2 id="Representing-occurrence-of-symbols-using-regular-expressions"><a href="#Representing-occurrence-of-symbols-using-regular-expressions" class="headerlink" title="Representing occurrence of symbols using regular expressions"></a>Representing occurrence of symbols using regular expressions</h2><p>letter = [a – z] or [A – Z]<br>digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 or [0-9]<br>sign = [ + | - ]</p>
-<h2 id="Representing-language-tokens-using-regular-expressions"><a href="#Representing-language-tokens-using-regular-expressions" class="headerlink" title="Representing language tokens using regular expressions"></a>Representing language tokens using regular expressions</h2><p>Decimal = (sign)?(digit)+<br>Identifier = (letter)(letter | digit)*<br>The only problem left with the lexical analyzer is how to verify the validity of a regular expression used in specifying the patterns of keywords of a language. A well-accepted solution is to use finite automata for verification.</p>
+<h3 id="Preprocessor"><a href="#Preprocessor" class="headerlink" title="Preprocessor"></a>Preprocessor</h3><p>A preprocessor, generally considered as a part of compiler, is a tool that produces input for compilers. It deals with macro-processing, augmentation, file inclusion, language extension, etc.</p>
+<h3 id="Interpreter"><a href="#Interpreter" class="headerlink" title="Interpreter"></a>Interpreter</h3><p>An interpreter, like a compiler, translates high-level language into low-level machine language. The difference lies in the way they read the source code or input. A compiler reads the whole source code at once, creates tokens, checks semantics, generates intermediate code, executes the whole program and may involve many passes. In contrast, an interpreter reads a statement from the input, converts it to an intermediate code, executes it, then takes the next statement in sequence. If an error occurs, an interpreter stops execution and reports it. whereas a compiler reads the whole program even if it encounters several errors.</p>
+<h3 id="Assembler"><a href="#Assembler" class="headerlink" title="Assembler"></a>Assembler</h3><p>An assembler translates assembly language programs into machine code.The output of an assembler is called an object file, which contains a combination of machine instructions as well as the data required to place these instructions in memory.</p>
+<h3 id="Linker"><a href="#Linker" class="headerlink" title="Linker"></a>Linker</h3><p>Linker is a computer program that links and merges various object files together in order to make an executable file. All these files might have been compiled by separate assemblers. The major task of a linker is to search and locate referenced module/routines in a program and to determine the memory location where these codes will be loaded, making the program instruction to have absolute references.</p>
+<h3 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h3><p>Loader is a part of operating system and is responsible for loading executable files into memory and execute them. It calculates the size of a program (instructions and data) and creates memory space for it. It initializes various registers to initiate execution.</p>
+<h3 id="Cross-compiler"><a href="#Cross-compiler" class="headerlink" title="Cross-compiler"></a>Cross-compiler</h3><p>A compiler that runs on platform (A) and is capable of generating executable code for platform (B) is called a cross-compiler.</p>
+<h3 id="Source-to-source-Compiler"><a href="#Source-to-source-Compiler" class="headerlink" title="Source-to-source Compiler"></a>Source-to-source Compiler</h3><p>A compiler that takes the source code of one programming language and translates it into the source code of another programming language is called a source-to-source compiler.</p>
 
                 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2024/04/13/cd-overview/" data-toggle="tooltip" data-placement="top" title="编译器设计-概述">&larr; Previous Post</a>
-                    </li>
                     
+                    <li class="next">
+                        <a href="/2024/03/31/正则表达式/" data-toggle="tooltip" data-placement="top" title="正则表达式">Next Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -344,7 +329,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Compiler-Design-Regular-Expressions"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Compiler Design - Regular Expressions</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Operations"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Operations</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Notations"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Notations</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Precedence-and-Associativity"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Precedence and Associativity</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Representing-valid-tokens-of-a-language-in-regular-expression"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Representing valid tokens of a language in regular expression</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Representing-occurrence-of-symbols-using-regular-expressions"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Representing occurrence of symbols using regular expressions</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Representing-language-tokens-using-regular-expressions"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">Representing language tokens using regular expressions</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Compiler-Design-Overview"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Compiler Design - Overview</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Language-Processing-System"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Language Processing System</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Preprocessor"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">Preprocessor</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Interpreter"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">Interpreter</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Assembler"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">Assembler</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Linker"><span class="toc-nav-number">1.1.4.</span> <span class="toc-nav-text">Linker</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Loader"><span class="toc-nav-number">1.1.5.</span> <span class="toc-nav-text">Loader</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Cross-compiler"><span class="toc-nav-number">1.1.6.</span> <span class="toc-nav-text">Cross-compiler</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Source-to-source-Compiler"><span class="toc-nav-number">1.1.7.</span> <span class="toc-nav-text">Source-to-source Compiler</span></a></li></ol></li></ol></li></ol>
             
           
           </div>
